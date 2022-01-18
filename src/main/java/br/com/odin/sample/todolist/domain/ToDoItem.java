@@ -1,6 +1,7 @@
 package br.com.odin.sample.todolist.domain;
 
-import br.com.odin.sample.todolist.domain.dtos.ToDoItemDTO;
+import br.com.odin.sample.todolist.application.dtos.ToDoListItemsRequestDTO;
+import br.com.odin.sample.todolist.application.dtos.ToDoListItemsResponseDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,13 +12,13 @@ public class ToDoItem {
     private String name;
     private Date targetDate;
     private Status status;
-    private List<ToDoItemDTO> toDoItemDTOList;
+    private List<ToDoListItemsRequestDTO> toDoItemDTOList;
 
     public ToDoItem() {
 
     }
 
-    public ToDoItem(List<ToDoItemDTO> toDoItemDTOList) {
+    public ToDoItem(List<ToDoListItemsRequestDTO> toDoItemDTOList) {
         this.toDoItemDTOList = toDoItemDTOList;
     }
 
@@ -30,7 +31,7 @@ public class ToDoItem {
     public List<ToDoItem> toObject() {
 
         List<ToDoItem> toDoItems = new ArrayList<>();
-        for (ToDoItemDTO toDoItemDTO : this.toDoItemDTOList) {
+        for (ToDoListItemsRequestDTO toDoItemDTO : this.toDoItemDTOList) {
 
             ToDoItem toDoItem = new ToDoItem(toDoItemDTO.getName(),
                     toDoItemDTO.getTargetDate(),
@@ -42,12 +43,12 @@ public class ToDoItem {
         return toDoItems;
     }
 
-    public List<ToDoItemDTO> toDTO(List<ToDoItem> toDoItemList) {
+    public List<ToDoListItemsResponseDTO> toDTO(List<ToDoItem> toDoItemList) {
 
-        List<ToDoItemDTO> toDoItemDTOList = new ArrayList<>();
+        List<ToDoListItemsResponseDTO> toDoItemDTOList = new ArrayList<>();
         for (ToDoItem toDoItem : toDoItemList) {
 
-            ToDoItemDTO toDoItemDTO = new ToDoItemDTO(toDoItem.getName(),
+            ToDoListItemsResponseDTO toDoItemDTO = new ToDoListItemsResponseDTO(toDoItem.getName(),
                     toDoItem.getTargetDate(),
                     toDoItem.getStatus());
 

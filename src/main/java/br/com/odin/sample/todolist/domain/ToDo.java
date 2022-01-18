@@ -1,8 +1,5 @@
 package br.com.odin.sample.todolist.domain;
 
-
-import br.com.odin.sample.todolist.infrastructure.adapters.entities.ToDoEntity;
-
 import java.util.List;
 
 public class ToDo {

@@ -9,4 +9,6 @@ public interface ToDoRepositoryPort {
     void add(ToDo toDo);
 
     ToDo getById(ToDo toDo);
+
+    List<ToDo> get();
 }

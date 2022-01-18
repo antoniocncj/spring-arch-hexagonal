@@ -1,0 +1,153 @@
+openapi: 3.0.0
+info:
+  title: To-Do List API
+  version: 1.0.0
+  description: Especificacao de API para gerenciamento de listas de tarefas (to-do list)
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/antoniocncj/poc/1.0.0
+  - url: http://dev-api.todolist.com/v1
+    description: DEV-ENV
+  - url: http://api.todolist.com/v1
+    description: PROD-ENV
+paths:
+  /todolist:
+    post:
+      tags:
+        - todolist
+      summary: Cria uma nova lista de tarefas
+      operationId: createToDoList
+      responses:
+        '405':
+          description: Input inválido.
+      requestBody:
+        $ref: '#/components/requestBodies/ToDoRequestDTO'
+
+  /todolist/{id}:
+    get:
+      tags:
+        - todolist
+      summary: Busca uma lista de tarefas pelo id
+      description: retorna uma lista de tarefas
+      operationId: getToDoById
+      parameters:
+        - name: id
+          in: path
+          description: identificador único da lista de tarefas
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToDoResponseDTO'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ToDoResponseDTO'
+        '400':
+          description: Id fornceido inválido
+        '404':
+          description: Registro não encontrado
+
+  /todolist/all:
+    get:
+      tags:
+        - todolist
+      summary: Busca todas as listas de tarefas.
+      description: retorna um array de lista de tarefas
+      operationId: getAllToDoList
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ToDoResponseDTO'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ToDoResponseDTO'
+        '400':
+          description: Id fornceido inválido
+        '404':
+          description: Registro não encontrado
+
+components:
+  requestBodies:
+    ToDoRequestDTO:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ToDoRequestDTO'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ToDoRequestDTO'
+    ToDoResponseDTO:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ToDoResponseDTO'
+
+  schemas:
+    ToDoRequestDTO:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: minha-lista-de-tarefas
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToDoListItemsRequestDTO'
+
+    ToDoListItemsRequestDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: pagar-conta-de-luz ou fazer-bolo-aniversario
+        targetDate:
+          type: string
+          format: date
+          example: data alvo para cumprir a tarefa
+
+    ToDoResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: código indentificador da lista de tarefas
+        name:
+          type: string
+          example: minha-lista-de-tarefas
+        items:
+          $ref: '#/components/schemas/ToDoListItemsResponseDTO'
+
+    ToDoListItemsResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: código indentificador da tarefa
+        name:
+          type: string
+          example: pagar-conta-de-luz ou fazer-bolo-aniversario
+        targetDate:
+          type: string
+          format: date
+          example: data alvo para cumprir a tarefa
+        status:
+          type: string
+          enum: [Backlog,InProgress, Done,Cancelled ]

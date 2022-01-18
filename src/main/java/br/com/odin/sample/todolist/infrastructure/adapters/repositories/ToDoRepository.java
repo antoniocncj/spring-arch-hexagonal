@@ -5,6 +5,9 @@ import br.com.odin.sample.todolist.domain.ports.repository.ToDoRepositoryPort;
 import br.com.odin.sample.todolist.infrastructure.adapters.entities.ToDoEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ToDoRepository implements ToDoRepositoryPort {
 
@@ -27,5 +30,19 @@ public class ToDoRepository implements ToDoRepositoryPort {
         ToDoEntity toDoEntity = this.springToDoRepository.getById(toDo.getId());
 
         return new ToDo(toDoEntity.getName(),toDoEntity.getToDoItem());
+    }
+
+    @Override
+    public List<ToDo> get() {
+        
+        List<ToDoEntity> toDoEntityList = this.springToDoRepository.findAll();
+
+        List<ToDo> toDoList = new ArrayList<>();
+
+        for (ToDoEntity toDoEntity: toDoEntityList ) {
+            toDoList.add(new ToDo(toDoEntity.getName(),toDoEntity.getToDoItem()));
+        }
+
+        return toDoList;
     }
 }
