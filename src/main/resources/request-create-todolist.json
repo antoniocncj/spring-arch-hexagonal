@@ -1,0 +1,11 @@
+
+//POST --> http://localhost:8090/todolist/
+//GET --> http://localhost:8090/todolist/{id}
+
+{
+  "name":"lista certificacao az900",
+  "items":[{"name":"curso microsoft", "targetDate":"03032022"},
+    {"name":"simulado measureaup", "targetDate":"05032022"},
+    {"name":"prova on line", "targetDate":"06032022"}]
+
+}

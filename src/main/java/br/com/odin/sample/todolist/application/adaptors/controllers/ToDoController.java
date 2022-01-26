@@ -1,8 +1,8 @@
 package br.com.odin.sample.todolist.application.adaptors.controllers;
 
-import br.com.odin.sample.todolist.application.adaptors.controllers.api.TodolistApi;
-import br.com.odin.sample.todolist.application.dtos.ToDoRequestDTO;
-import br.com.odin.sample.todolist.application.dtos.ToDoResponseDTO;
+import br.com.odin.sample.todolist.application.adaptors.controllers.apisw.TodolistApi;
+import br.com.odin.sample.todolist.shared.dtos.ToDoRequestDTO;
+import br.com.odin.sample.todolist.shared.dtos.ToDoResponseDTO;
 import br.com.odin.sample.todolist.domain.ports.interfaces.ToDoServicePort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -26,11 +26,11 @@ public class ToDoItemEntity {
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name="todo_id",nullable = false)
+    @JoinColumn(name = "todo_id")
     private ToDoEntity toDoEntity;
 
-    public ToDoItemEntity(String name, Date targetDate, Status status,ToDoEntity toDoEntity) {
+    public ToDoItemEntity(String name, Long id, Date targetDate, Status status, ToDoEntity toDoEntity) {
+        this.id = id;
         this.name = name;
         this.targetDate = targetDate;
         this.status = status;
@@ -38,7 +38,7 @@ public class ToDoItemEntity {
 
     }
 
-    public ToDoItemEntity(){
+    public ToDoItemEntity() {
 
     }
 

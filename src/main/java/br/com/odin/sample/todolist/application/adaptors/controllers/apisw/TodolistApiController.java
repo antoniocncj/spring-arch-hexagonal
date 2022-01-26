@@ -1,19 +1,18 @@
-package br.com.odin.sample.todolist.application.adaptors.controllers.api;
+package br.com.odin.sample.todolist.application.adaptors.controllers.apisw;
 
-import br.com.odin.sample.todolist.application.dtos.ToDoRequestDTO;
-import br.com.odin.sample.todolist.application.dtos.ToDoResponseDTO;
+import br.com.odin.sample.todolist.shared.dtos.ToDoRequestDTO;
+import br.com.odin.sample.todolist.shared.dtos.ToDoResponseDTO;
 import br.com.odin.sample.todolist.domain.ports.interfaces.ToDoServicePort;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
 public class TodolistApiController implements TodolistApi {
 
     private final ToDoServicePort toDoServicePort;
@@ -38,7 +37,7 @@ public class TodolistApiController implements TodolistApi {
 
     @Override
     public ResponseEntity<ToDoResponseDTO> getToDoById(Long id) {
-        return null;
+        return new ResponseEntity<List<ToDoResponseDTO>>(HttpStatus.OK).ok(toDoServicePort.get(id));
     }
 
 

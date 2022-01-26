@@ -1,4 +1,4 @@
-package br.com.odin.sample.todolist.application.dtos;
+package br.com.odin.sample.todolist.shared.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class ToDoResponseDTO   {
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("name")
   private String name;
@@ -22,12 +22,13 @@ public class ToDoResponseDTO   {
   @JsonProperty("items")
   private List<ToDoListItemsResponseDTO> items;
 
-    public ToDoResponseDTO(String name, List<ToDoListItemsResponseDTO> toDTO) {
+    public ToDoResponseDTO(String name, Long id, List<ToDoListItemsResponseDTO> toDTO) {
       this.name = name;
+      this.id = id;
       this.items = toDTO;
     }
 
-    public ToDoResponseDTO id(Integer id) {
+    public ToDoResponseDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -39,11 +40,11 @@ public class ToDoResponseDTO   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -3,26 +3,29 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-package br.com.odin.sample.todolist.application.adaptors.controllers.api;
+package br.com.odin.sample.todolist.application.adaptors.controllers.apipl;
 
-
-import br.com.odin.sample.todolist.application.dtos.ToDoRequestDTO;
-import br.com.odin.sample.todolist.application.dtos.ToDoResponseDTO;
+import br.com.odin.sample.todolist.shared.dtos.ToDoRequestDTO;
+import br.com.odin.sample.todolist.shared.dtos.ToDoResponseDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-17T17:48:31.548787900-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-19T16:29:33.573349-02:00[America/Sao_Paulo]")
 
-@Validated
-@Api(description = "the todolist API")
-@RequestMapping("todolist")
+//@Validated
+//@Api(value = "todolist", description = "the todolist API")
 public interface TodolistApi {
+
+    default TodolistApiDelegate getDelegate() {
+        return new TodolistApiDelegate() {};
+    }
 
     /**
      * POST /todolist : Cria uma nova lista de tarefas
@@ -33,11 +36,12 @@ public interface TodolistApi {
     @ApiOperation(value = "Cria uma nova lista de tarefas", nickname = "createToDoList", notes = "", tags={ "todolist", })
     @ApiResponses(value = { 
         @ApiResponse(code = 405, message = "Input inválido.") })
-    @RequestMapping(value = "/",
+    @RequestMapping(value = "/todolist",
         consumes = { "application/json", "application/xml" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> createToDoList(@ApiParam(value = ""  )  @Valid @RequestBody(required = false) ToDoRequestDTO toDoRequestDTO);
-
+    default ResponseEntity<Void> createToDoList(@ApiParam(value = ""  )  @Valid @RequestBody(required = false) ToDoRequestDTO toDoRequestDTO) {
+        return getDelegate().createToDoList(toDoRequestDTO);
+    }
 
 
     /**
@@ -53,10 +57,12 @@ public interface TodolistApi {
         @ApiResponse(code = 200, message = "Sucesso", response = ToDoResponseDTO.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Id fornceido inválido"),
         @ApiResponse(code = 404, message = "Registro não encontrado") })
-    @RequestMapping(value = "/all",
+    @RequestMapping(value = "/todolist/all",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<ToDoResponseDTO>> getAllToDoList();
+    default ResponseEntity<List<ToDoResponseDTO>> getAllToDoList() {
+        return getDelegate().getAllToDoList();
+    }
 
 
     /**
@@ -73,10 +79,11 @@ public interface TodolistApi {
         @ApiResponse(code = 200, message = "Sucesso", response = ToDoResponseDTO.class),
         @ApiResponse(code = 400, message = "Id fornceido inválido"),
         @ApiResponse(code = 404, message = "Registro não encontrado") })
-    @RequestMapping(value = "/{id}",
+    @RequestMapping(value = "/todolist/{id}",
         produces = { "application/json", "application/xml" }, 
         method = RequestMethod.GET)
-    ResponseEntity<ToDoResponseDTO> getToDoById(@ApiParam(value = "identificador único da lista de tarefas",required=true) @PathVariable("id") Long id);
-
+    default ResponseEntity<ToDoResponseDTO> getToDoById(@ApiParam(value = "identificador único da lista de tarefas",required=true) @PathVariable("id") Long id) {
+        return getDelegate().getToDoById(id);
+    }
 
 }

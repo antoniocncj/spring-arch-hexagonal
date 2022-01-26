@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "namespace": "br.com.odin.cadastral.todolist",
+  "name": "TodoList",
+  "version": "2",
+  "fields": [
+    { "name": "id", "type": "long", "doc": "Identificador do TodoList" },
+    { "name": "name", "type": "string", "doc": "Nome do TodoList" }
+  ]
+ }

@@ -1,13 +1,10 @@
-package br.com.odin.sample.todolist.application.dtos;
+package br.com.odin.sample.todolist.shared.dtos;
 
 import br.com.odin.sample.todolist.domain.Status;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,7 +15,7 @@ import java.util.Objects;
 
 public class ToDoListItemsResponseDTO   {
   @JsonProperty("id")
-  private Integer id;
+  private Long id;
 
   @JsonProperty("name")
   private String name;
@@ -29,13 +26,14 @@ public class ToDoListItemsResponseDTO   {
   @JsonProperty("status")
   private Status status;
 
-  public ToDoListItemsResponseDTO(String name, Date targetDate, Status status) {
+  public ToDoListItemsResponseDTO(String name, Long id, Date targetDate, Status status) {
     this.name = name;
+    this.id = id;
     this.targetDate = targetDate;
     this.status = status;
   }
 
-  public ToDoListItemsResponseDTO id(Integer id) {
+  public ToDoListItemsResponseDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -47,11 +45,11 @@ public class ToDoListItemsResponseDTO   {
   @ApiModelProperty(value = "")
 
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

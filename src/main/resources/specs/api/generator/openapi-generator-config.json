@@ -10,5 +10,6 @@
   "basePackage": "br.com.odin.sample.todolist",
   "modelPackage": "br.com.odin.sample.todolist.domain.dtos",
   "apiPackage": "br.com.odin.sample.todolist.application.adaptors.controllers",
-  "configPackage": "br.com.odin.sample.todolist.infrastructure.configs"
+  "configPackage": "br.com.odin.sample.todolist.infrastructure.configs",
+  "delegatePattern": false
 }

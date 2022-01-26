@@ -4,9 +4,7 @@ info:
   version: 1.0.0
   description: Especificacao de API para gerenciamento de listas de tarefas (to-do list)
 servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/antoniocncj/poc/1.0.0
+
   - url: http://dev-api.todolist.com/v1
     description: DEV-ENV
   - url: http://api.todolist.com/v1

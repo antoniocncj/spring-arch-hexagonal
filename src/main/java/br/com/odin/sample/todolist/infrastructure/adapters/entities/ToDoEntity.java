@@ -43,6 +43,7 @@ public class ToDoEntity {
         for (ToDoItem toDoItem : toDoItemList) {
 
             ToDoItemEntity toDoItemEntity = new ToDoItemEntity(toDoItem.getName(),
+                    toDoItem.getId(),
                     toDoItem.getTargetDate(),
                     toDoItem.getStatus(),
                     this);
@@ -57,6 +58,7 @@ public class ToDoEntity {
         for (ToDoItemEntity toDoItemEntity : toDoItemEntity) {
 
             ToDoItem toDoItem = new ToDoItem(toDoItemEntity.getName(),
+                    toDoItemEntity.getId(),
                     toDoItemEntity.getTargetDate(),
                     toDoItemEntity.getStatus());
 

@@ -1,7 +1,13 @@
-package br.com.odin.sample.todolist.application.dtos;
+package br.com.odin.sample.todolist.shared.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.avro.AvroFactory;
+import com.fasterxml.jackson.dataformat.avro.AvroSchema;
+import com.fasterxml.jackson.dataformat.avro.schema.AvroSchemaGenerator;
 import io.swagger.annotations.ApiModelProperty;
+
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -111,6 +117,22 @@ public class ToDoRequestDTO   {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
+  }
+
+  public String toAvro(){
+    ObjectMapper mapper = new ObjectMapper(new AvroFactory());
+    AvroSchemaGenerator gen = new AvroSchemaGenerator();
+    try {
+      mapper.acceptJsonFormatVisitor(ToDoRequestDTO.class, gen);
+    } catch (JsonMappingException e) {
+      e.printStackTrace();
+    }
+    AvroSchema schemaWrapper = gen.getGeneratedSchema();
+
+    org.apache.avro.Schema avroSchema = schemaWrapper.getAvroSchema();
+    String asJson = avroSchema.toString(true);
+
+    return asJson;
   }
 }
 

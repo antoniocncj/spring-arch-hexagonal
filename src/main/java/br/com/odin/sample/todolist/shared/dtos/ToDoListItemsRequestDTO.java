@@ -1,10 +1,11 @@
-package br.com.odin.sample.todolist.application.dtos;
+package br.com.odin.sample.todolist.shared.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ import java.util.Objects;
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-17T17:48:31.548787900-03:00[America/Sao_Paulo]")
 
 public class ToDoListItemsRequestDTO   {
+
   @JsonProperty("name")
   private String name;
 
@@ -54,7 +56,18 @@ public class ToDoListItemsRequestDTO   {
   @Valid
 
   public Date getTargetDate() {
-    return targetDate;
+    SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    try {
+     String date =   simpleDateFormat.format(this.targetDate);
+
+     return simpleDateFormat.parse(date);
+
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return null;
+
+    //return new Date(dateFormat.format(this.targetDate));
   }
 
   public void setTargetDate(Date targetDate) {

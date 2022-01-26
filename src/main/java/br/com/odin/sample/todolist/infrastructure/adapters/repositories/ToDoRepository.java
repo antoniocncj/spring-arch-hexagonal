@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ToDoRepository implements ToDoRepositoryPort {
@@ -18,18 +19,20 @@ public class ToDoRepository implements ToDoRepositoryPort {
     }
 
     @Override
-    public void add(ToDo toDo) {
+    public ToDo add(ToDo toDo) {
         ToDoEntity toDoEntity = new ToDoEntity(toDo.getName());
         toDoEntity.setToDoItemEntity(toDo.getToDoItem());
 
-        this.springToDoRepository.save(toDoEntity);
+        toDoEntity = this.springToDoRepository.save(toDoEntity);
+
+        return new ToDo(toDoEntity.getId(), toDoEntity.getName());
     }
 
     @Override
     public ToDo getById(ToDo toDo) {
-        ToDoEntity toDoEntity = this.springToDoRepository.getById(toDo.getId());
+        Optional<ToDoEntity> toDoEntity = this.springToDoRepository.findById(toDo.getId());
 
-        return new ToDo(toDoEntity.getName(),toDoEntity.getToDoItem());
+        return new ToDo(toDoEntity.get().getName(), toDoEntity.get().getId(),toDoEntity.get().getToDoItem());
     }
 
     @Override
