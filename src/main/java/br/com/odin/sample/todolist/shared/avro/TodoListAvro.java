@@ -89,7 +89,6 @@ public class TodoListAvro extends org.apache.avro.specific.SpecificRecordBase im
   public TodoListAvro(Long id, String name) {
     this.id = id;
     this.name = name;
-
   }
 
   public SpecificData getSpecificData() { return MODEL$; }

@@ -248,7 +248,7 @@
                             <goal>idl-protocol</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/resources/specs/events/produces
+                            <sourceDirectory>${project.basedir}/src/main/resources/specs/events/consumes
                             </sourceDirectory>
                             <stringType>String</stringType>
                             <createSetters>false</createSetters>

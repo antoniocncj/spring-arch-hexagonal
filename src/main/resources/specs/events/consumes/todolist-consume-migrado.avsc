@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "doc": "Nome do TodoList",
+      "name": "quebrou",
+      "type": {
+        "avro.java.string": "String",
+        "type": "string"
+      }
+    }
+  ],
+  "name": "TodoListConsume",
+  "namespace": "br.com.odin.cadastral.todolist",
+  "type": "record",
+  "version": "3"
+}

@@ -1,6 +1,8 @@
 package br.com.odin.sample.todolist.infrastructure.configs;
 
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +20,8 @@ public class KafkaProperties {
 	private String retriesConfig;
 	private Class<?> keySerializer = StringSerializer.class;
 	private Class<?> valueSerializer = KafkaAvroSerializer.class;
+	private Class<?> keyDeserializer = StringDeserializer.class;
+	private Class<?> valueDeserializer = KafkaAvroDeserializer.class;
 	private String schemaRegistryUrl;
 
 	public List<String> getBootstrapServers() {
@@ -56,8 +60,16 @@ public class KafkaProperties {
 		return valueSerializer;
 	}
 
+	public Class<?> getValueDeserializer() {
+		return valueDeserializer;
+	}
+
 	public void setValueSerializer(Class<?> valueSerializer) {
 		this.valueSerializer = valueSerializer;
+	}
+
+	public void setValueDeserializer(Class<?> valueDeserializer) {
+		this.valueDeserializer = valueDeserializer;
 	}
 
 	public String getSchemaRegistryUrl() {
@@ -66,5 +78,9 @@ public class KafkaProperties {
 
 	public void setSchemaRegistryUrl(String schemaRegistryUrl) {
 		this.schemaRegistryUrl = schemaRegistryUrl;
+	}
+
+	public Object getKeyDeserializer() {
+		return this.keyDeserializer;
 	}
 }
