@@ -109,6 +109,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ToDoListItemsRequestDTO'
+        createdDate:
+          type: string
+          format: date-time
+          example: 2022-01-19T16:29:33.573349-02:00
 
     ToDoListItemsRequestDTO:
       type: object
@@ -132,6 +136,10 @@ components:
           example: minha-lista-de-tarefas
         items:
           $ref: '#/components/schemas/ToDoListItemsResponseDTO'
+        createdDate:
+          type: string
+          format: date-time
+          example: 2022-01-19T16:29:33.573349-02:00
 
     ToDoListItemsResponseDTO:
       type: object

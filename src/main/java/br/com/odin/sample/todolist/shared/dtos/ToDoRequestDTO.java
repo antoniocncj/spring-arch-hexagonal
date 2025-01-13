@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.avro.AvroFactory;
-import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 import com.fasterxml.jackson.dataformat.avro.schema.AvroSchemaGenerator;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -12,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +27,9 @@ public class ToDoRequestDTO   {
   @JsonProperty("items")
   @Valid
   private List<ToDoListItemsRequestDTO> items = null;
+
+  @JsonProperty("createdDate")
+  private Date createdDate;
 
   public ToDoRequestDTO name(String name) {
     this.name = name;
@@ -78,6 +81,26 @@ public class ToDoRequestDTO   {
     this.items = items;
   }
 
+  public ToDoRequestDTO createdDate(Date createdDate) {
+    this.createdDate = createdDate;
+    return this;
+  }
+
+  /**
+   * Get createdDate
+   * @return createdDate
+  */
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -89,12 +112,13 @@ public class ToDoRequestDTO   {
     }
     ToDoRequestDTO toDoRequestDTO = (ToDoRequestDTO) o;
     return Objects.equals(this.name, toDoRequestDTO.name) &&
-        Objects.equals(this.items, toDoRequestDTO.items);
+        Objects.equals(this.items, toDoRequestDTO.items) &&
+        Objects.equals(this.createdDate, toDoRequestDTO.createdDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, items);
+    return Objects.hash(name, items, createdDate);
   }
 
   @Override
@@ -104,6 +128,7 @@ public class ToDoRequestDTO   {
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
+    sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -135,4 +160,3 @@ public class ToDoRequestDTO   {
     return asJson;
   }
 }
-
