@@ -4,6 +4,7 @@ import br.com.odin.sample.todolist.domain.ToDoItem;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,9 @@ public class ToDoEntity {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "created_date")
+    private Date createdDate;
 
     @OneToMany(mappedBy = "toDoEntity", cascade = CascadeType.ALL,fetch=FetchType.LAZY )
     private List<ToDoItemEntity> toDoItemEntity;
@@ -35,6 +39,14 @@ public class ToDoEntity {
 
     public String getName() {
         return name;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public void setToDoItemEntity(List<ToDoItem> toDoItemList) {

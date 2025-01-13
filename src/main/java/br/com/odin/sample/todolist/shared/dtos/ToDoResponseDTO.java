@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,13 +23,17 @@ public class ToDoResponseDTO   {
   @JsonProperty("items")
   private List<ToDoListItemsResponseDTO> items;
 
-    public ToDoResponseDTO(String name, Long id, List<ToDoListItemsResponseDTO> toDTO) {
-      this.name = name;
-      this.id = id;
-      this.items = toDTO;
-    }
+  @JsonProperty("createdDate")
+  private Date createdDate;
 
-    public ToDoResponseDTO id(Long id) {
+  public ToDoResponseDTO(String name, Long id, List<ToDoListItemsResponseDTO> toDTO, Date createdDate) {
+    this.name = name;
+    this.id = id;
+    this.items = toDTO;
+    this.createdDate = createdDate;
+  }
+
+  public ToDoResponseDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -89,6 +94,26 @@ public class ToDoResponseDTO   {
     this.items = items;
   }
 
+  public ToDoResponseDTO createdDate(Date createdDate) {
+    this.createdDate = createdDate;
+    return this;
+  }
+
+  /**
+   * Get createdDate
+   * @return createdDate
+  */
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -101,12 +126,13 @@ public class ToDoResponseDTO   {
     ToDoResponseDTO toDoResponseDTO = (ToDoResponseDTO) o;
     return Objects.equals(this.id, toDoResponseDTO.id) &&
         Objects.equals(this.name, toDoResponseDTO.name) &&
-        Objects.equals(this.items, toDoResponseDTO.items);
+        Objects.equals(this.items, toDoResponseDTO.items) &&
+        Objects.equals(this.createdDate, toDoResponseDTO.createdDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, items);
+    return Objects.hash(id, name, items, createdDate);
   }
 
   @Override
@@ -117,6 +143,7 @@ public class ToDoResponseDTO   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
+    sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -132,4 +159,3 @@ public class ToDoResponseDTO   {
     return o.toString().replace("\n", "\n    ");
   }
 }
-
